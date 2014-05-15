@@ -117,3 +117,4 @@ Here's all available classes listed:
 [**Forum**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/forum/)    
 [**Leave a suggestion!**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/forum/suggestions)    
 [**Crafting recipes**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/pages/recipes/)    
+[**BukkitDev**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/)
