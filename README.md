@@ -5,7 +5,7 @@ McRPG
 * [Overview](https://github.com/condolent/McRPG/blob/master/README.md#overview)
 * [Installation](https://github.com/condolent/McRPG/blob/master/README.md#installation)
 * [Configuration](https://github.com/condolent/McRPG/blob/master/README.md#configuration)
-*    [Configuration-codes]((https://github.com/condolent/McRPG/blob/master/README.md#configuration-codes)
+* [Configuration codes](https://github.com/condolent/McRPG/blob/master/README.md#configuration-codes)
 # Overview
 McRPG is a plugin that will make your whole server into a new role playing game!
 With weapons, armor and items inspired by the enormous RPG World of Warcraft your server
