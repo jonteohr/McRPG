@@ -1,9 +1,10 @@
 McRPG
 =====
 
-A Bukkit plugin that makes your server into a whole new RPG game!
+# Table of Contents:
+* [Overview](http)
 
-
+# Overview
 McRPG is a plugin that will make your whole server into a new role playing game!
 With weapons, armor and items inspired by the enormous RPG World of Warcraft your server
 will draw forth players who will stay for a long while when enjoying this game-transforming plugin.
