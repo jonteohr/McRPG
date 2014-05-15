@@ -2,7 +2,9 @@ McRPG
 =====
 
 # Table of Contents:
-* [Overview](http)
+* [Overview](https://github.com/condolent/McRPG/blob/master/README.md#overview)
+* [Installation](https://github.com/condolent/McRPG/blob/master/README.md#installation)
+* [Configuration](https://github.com/condolent/McRPG/blob/master/README.md#configuration)
 
 # Overview
 McRPG is a plugin that will make your whole server into a new role playing game!
@@ -12,6 +14,11 @@ What this plugin basically does is creating and renaming several items, with new
 with inspiration from World of Warcraft.
 
 
+# Installation
+It's very simple! You simply click [Download ZIP file](#) on the right side of the project and drag the //plugin// folder into your server root.
 
-This plugin is approved by bukkit and can also be accessed via the bukkitDev page:
-http://dev.bukkit.org/bukkit-plugins/mc-rpg/
+# Configuration
+This is how the configuration-file looks like:
+```
+test
+```
