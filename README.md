@@ -29,7 +29,7 @@ with inspiration from World of Warcraft.
 _More features will be added as we implement them into the plugin_
 
 # Installation
-It's very simple! You simply click [Download ZIP file](https://github.com/condolent/McRPG/archive/master.zip) on the right side of the project and drag the _plugin_ folder into your server root.
+It's very simple! You simply click [Download ZIP file](https://github.com/condolent/McRPG/archive/master.zip) on the right side of the project and drag the _McRPG-master\plugins_ folder into your server root and merge the plugins-folder with the one in your root.
 
 # Configuration
 This is how the configuration-file looks like:
