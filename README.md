@@ -6,6 +6,7 @@ McRPG
 * [Installation](https://github.com/condolent/McRPG/blob/master/README.md#installation)
 * [Configuration](https://github.com/condolent/McRPG/blob/master/README.md#configuration)
 * [Configuration codes](https://github.com/condolent/McRPG/blob/master/README.md#configuration-codes)
+
 # Overview
 McRPG is a plugin that will make your whole server into a new role playing game!
 With weapons, armor and items inspired by the enormous RPG World of Warcraft your server
@@ -46,6 +47,6 @@ The ``MOTD:`` is setting what it should say. Default is:
 and it's OK to keep it, but if you'd like to, you can easily change it to whatever you want!
 
 ### Configuration codes
-There's a few codes added into the configuration to make it much more cooler! (Like it's possible, eh?)
+There's a few codes added into the configuration to make it much more cooler! (Like it's possible, eh?)    
 ``%player%`` gets the player name.   
 ``&<color>`` makes the following a certain color. All color codes are found at [the Minecraft Gamepedia](http://minecraft.gamepedia.com/Formatting_codes#Color_codes)
