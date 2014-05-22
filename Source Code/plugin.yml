@@ -1,0 +1,29 @@
+name: McRPG
+version: Alpha 1.2
+author: Condolent, Axel1811
+main: me.condolent.McRPG
+commands:
+   rpg:
+      description: Base command for McRPG
+   w:
+      description: Sends a whisper to a player
+   y:
+      description: Sends out a server-wide yell.
+   supply:
+      description: Supply a player with an item.
+   heal:
+      description: Heal a specified online player to full health.
+   class:
+      description: Choose which class you'd like to play as.
+   ci:
+      description: Clears your inventory from EVERYTHING. (Cannot undo)
+   gm:
+      description: Changes your gamemode. 0/1/survival/creative
+   setspawn:
+      description: Sets server-spawn.
+   spawn:
+      description: Teleports the player to spawn.
+      
+permissions:
+   mcrpg.admin:
+      description: Default admin privileges.

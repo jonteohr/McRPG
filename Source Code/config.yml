@@ -1,0 +1,15 @@
+# Default configuration for McRPG
+# Read through and change what's needed before publicing on your server for other players!
+# To disable something, change the 'enable' to 'disable' vice versa.
+
+# Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
+admin_yell: 'disable'
+
+# Send the player a welcome-message when joining?
+# If enable it will send the player a message
+welcome_msg: 'enable'
+
+# If welcome_msg is 'enable', then what should the message be?
+# %player% is playername.
+# To use colors, type & and then the COLOR CODE. Find all at: http://minecraft.gamepedia.com/Formatting_codes#Color_codes
+MOTD: '&6&oDarion whispers: Welcome back, %player%.'
