@@ -47,7 +47,7 @@ public class SupplyItems implements CommandExecutor {
 					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getServer().getPlayerExact(args[0]);
 					if(target == null) {
-						p.sendMessage(ChatColor.YELLOW + "Player " + args[0] + " not found.");
+						p.sendMessage(ChatColor.RED + "Player " + args[0] + " not found.");
 						return true;
 					}
 					if(args[1].equalsIgnoreCase("stick")) {
@@ -62,7 +62,7 @@ public class SupplyItems implements CommandExecutor {
 					return true;
 				}
 			} else {
-				p.sendMessage(ChatColor.RED + "This command is only availible to admins.");
+				p.sendMessage(ChatColor.RED + "§lThis command is only availible to admins.");
 			}
 		}
 		

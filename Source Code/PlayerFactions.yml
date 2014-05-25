@@ -1,8 +1,7 @@
-# You can edit this, simply delete users that you want to be able to choose class again!
+# You can edit this, simply delete users that you want to be able to choose factions again!
 # Players are no longer logged with their names, because of the new name change feature Mojang added to Minecraft.
 # Therefor players' UUID are logged instead, because of that it's not change-able.
 
-Mages: []
-Paladins: []
-Warriors: []
-Classed_players: []
+Horde: []
+Alliance: []
+Registered_Players: []

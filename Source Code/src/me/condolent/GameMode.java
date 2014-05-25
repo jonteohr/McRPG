@@ -24,7 +24,7 @@ public class GameMode implements CommandExecutor {
 			if(p.hasPermission("mcrpg.admin")) {
 			if(args.length < 1) {
 				
-				p.sendMessage(ChatColor.YELLOW + "/gm <0/1/creative/survival>");
+				p.sendMessage(ChatColor.RED + "/gm <0/1/creative/survival>");
 				
 			} else if(args.length == 1) {
 				
@@ -58,7 +58,7 @@ public class GameMode implements CommandExecutor {
 				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getServer().getPlayerExact(args[1]);
 				if(target == null) {
-					p.sendMessage(ChatColor.YELLOW + "Player " + args[1] + " not found.");
+					p.sendMessage(ChatColor.RED + "Player " + args[1] + " not found.");
 					return true;
 				}
 				
@@ -90,7 +90,7 @@ public class GameMode implements CommandExecutor {
 			
 			return true;
 			} else {
-				p.sendMessage(ChatColor.YELLOW + "You do not have access to this command!");
+				p.sendMessage(ChatColor.RED + "§lYou do not have access to this command!");
 				p.playSound(p.getLocation(), Sound.GHAST_SCREAM, 1, 1);
 			}
 		}

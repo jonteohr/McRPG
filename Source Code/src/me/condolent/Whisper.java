@@ -23,12 +23,12 @@ public class Whisper implements CommandExecutor {
 			if(cmd.getName().equalsIgnoreCase("w")) {
 				if(args.length < 2) {
 					p.sendMessage(ChatColor.RED + "Invalid arguments.");
-					p.sendMessage("/w <player> <message>");
+					p.sendMessage(ChatColor.RED + "/w <player> <message>");
 				} else {
 					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getServer().getPlayerExact(args[0]);
 					if(target == null) {
-						p.sendMessage(ChatColor.YELLOW + "Player " + args[0] + " not found.");
+						p.sendMessage(ChatColor.RED + "Player " + args[0] + " not found.");
 						return true;
 					}
 					StringBuilder s = new StringBuilder();

@@ -1,5 +1,5 @@
 name: McRPG
-version: Alpha 1.2
+version: Beta 1.0
 author: Condolent, Axel1811
 main: me.condolent.McRPG
 commands:
@@ -23,7 +23,9 @@ commands:
       description: Sets server-spawn.
    spawn:
       description: Teleports the player to spawn.
-      
+   faction:
+      description: Choose your faction.
+
 permissions:
    mcrpg.admin:
       description: Default admin privileges.

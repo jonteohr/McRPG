@@ -35,7 +35,7 @@ public class SimpleCommands implements CommandExecutor {
 					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getServer().getPlayerExact(args[0]);
 					if(target == null) {
-						p.sendMessage(ChatColor.YELLOW + "Player " + args[0] + " not found.");
+						p.sendMessage(ChatColor.RED + "Player " + args[0] + " not found.");
 						return true;
 					}
 					p.sendMessage(ChatColor.YELLOW + "You healed player " + target.getName());
@@ -46,7 +46,7 @@ public class SimpleCommands implements CommandExecutor {
 					p.sendMessage(ChatColor.RED + "Invalid arguments. Usage: /heal <player>");
 				}
 			} else {
-				p.sendMessage(ChatColor.RED + "That command is only availible to admins.");
+				p.sendMessage(ChatColor.RED + "§lThat command is only availible to admins.");
 			}
 			
 			return true;
@@ -62,7 +62,7 @@ public class SimpleCommands implements CommandExecutor {
 					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getServer().getPlayerExact(args[0]);
 					if(target == null) {
-						p.sendMessage(ChatColor.YELLOW + "Player " + args[0] + " not found.");
+						p.sendMessage(ChatColor.RED + "Player " + args[0] + " not found.");
 						return true;
 					}
 					target.getInventory().clear();
@@ -71,7 +71,7 @@ public class SimpleCommands implements CommandExecutor {
 					target.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 2);
 				}
 			} else {
-				p.sendMessage(ChatColor.YELLOW + "You do not have permission to this command.");
+				p.sendMessage(ChatColor.RED + "§lYou do not have permission to this command.");
 			}
 			return true;
 		}
@@ -81,7 +81,7 @@ public class SimpleCommands implements CommandExecutor {
 				p.getWorld().setSpawnLocation(p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
 				p.sendMessage(ChatColor.YELLOW + "Spawn set.");
 			} else {
-				p.sendMessage(ChatColor.YELLOW + "You do not have access to that command.");
+				p.sendMessage(ChatColor.RED + "§lYou do not have access to that command.");
 			}
 			return true;
 		}

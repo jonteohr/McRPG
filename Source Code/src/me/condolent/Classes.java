@@ -2,6 +2,8 @@ package me.condolent;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -21,7 +23,7 @@ public class Classes implements CommandExecutor {
 		plugin = instance;
 	}
 	
-	public FileConfiguration getCustomConfig() {
+	public FileConfiguration getClassesLog() {
 		return plugin.getPlayerLogging();
 	}
 	
@@ -67,38 +69,39 @@ public class Classes implements CommandExecutor {
 		
 		
 		// LOG THE PLAYER FOR CHOOSING CLASS
-		List<String> classed_players = getCustomConfig().getStringList("classed_players");
-		List<String> warriors = getCustomConfig().getStringList("warriors");
-		List<String> mages = getCustomConfig().getStringList("mages");
-		List<String> paladins = getCustomConfig().getStringList("paladins");
-		getCustomConfig().set("mages", mages);
-		getCustomConfig().set("warriors", warriors);
-		getCustomConfig().set("paladins", paladins);
-		getCustomConfig().set("classed_players", classed_players);
+		List<String> classed_players = getClassesLog().getStringList("Classed_players");
+		List<String> warriors = getClassesLog().getStringList("Warriors");
+		List<String> mages = getClassesLog().getStringList("Mages");
+		List<String> paladins = getClassesLog().getStringList("Paladins");
+		getClassesLog().set("Mages", mages);
+		getClassesLog().set("Warriors", warriors);
+		getClassesLog().set("Paladins", paladins);
+		getClassesLog().set("Classed_players", classed_players);
 		plugin.savePlayerLogging();
 		
 		if(cmd.getName().equalsIgnoreCase("class")) {
 			
 			if(args.length < 1) {
 				
-				p.sendMessage(ChatColor.YELLOW + "Invalid arguments! /class <class>");
-				p.sendMessage(ChatColor.YELLOW + "Avalible classes: Warrior, Mage & Paladin");
+				p.sendMessage(ChatColor.RED + "Invalid arguments! /class <class>");
+				p.sendMessage(ChatColor.RED + "Avalible classes: Warrior, Mage & Paladin");
 				
 			} else if(args.length == 1) {
-				if(getCustomConfig().getStringList("classed_players").contains(p.getName())) {
+				if(getClassesLog().getStringList("Classed_players").contains(p.getUniqueId().toString())) {
 					
-					p.sendMessage(ChatColor.YELLOW + "You've already chosen a class!");
+					p.sendMessage(ChatColor.RED + "You've already chosen a class!");
 					
 				}
-				if(!getCustomConfig().getStringList("classed_players").contains(p.getName())) {
+				if(!getClassesLog().getStringList("Classed_players").contains(p.getUniqueId().toString())) {
 					
 					if(args[0].equalsIgnoreCase("warrior")) {
 							p.sendMessage(ChatColor.YELLOW + "You chose Warrior as your class and were given starter-gear for Warriors.");
 							p.getInventory().addItem(new ItemStack(warriorweapon));
 							p.getInventory().setChestplate(warriorchest);
 							p.playSound(p.getLocation(), Sound.ANVIL_USE, 1, 1);
-							classed_players.add(p.getName());
-							warriors.add(p.getName());
+							classed_players.add(p.getUniqueId().toString());
+							warriors.add(p.getUniqueId().toString());
+							plugin.savePlayerLogging();
 					}
 				
 					if(args[0].equalsIgnoreCase("mage")) {
@@ -106,8 +109,9 @@ public class Classes implements CommandExecutor {
 						p.getInventory().addItem(new ItemStack(mageweapon));
 						p.getInventory().setHelmet(new ItemStack(magehat));
 						p.playSound(p.getLocation(), Sound.FIRE, 1, 1);
-						classed_players.add(p.getName());
-						mages.add(p.getName());
+						classed_players.add(p.getUniqueId().toString());
+						mages.add(p.getUniqueId().toString());
+						plugin.savePlayerLogging();
 					}
 					
 					if(args[0].equalsIgnoreCase("paladin")) {
@@ -115,15 +119,40 @@ public class Classes implements CommandExecutor {
 						p.getInventory().addItem(new ItemStack(paladinweapon));
 						p.getInventory().setLeggings(new ItemStack(paladinlegs));
 						p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 1);
-						classed_players.add(p.getName());
-						paladins.add(p.getName());
+						classed_players.add(p.getUniqueId().toString());
+						paladins.add(p.getUniqueId().toString());
+						plugin.savePlayerLogging();
 					}
 					
 				}
 				
-			} else if(args.length > 1) {
-				p.sendMessage(ChatColor.YELLOW + "Too many arguments! /class <class>");
-				p.sendMessage(ChatColor.YELLOW + "Avalible classes: Warrior, Mage & Paladin");
+			} 
+			if(args.length == 2) {
+				@SuppressWarnings("deprecation")
+				Player target = Bukkit.getServer().getPlayerExact(args[1]);
+				if(args[0].equalsIgnoreCase("deluser")) {
+					if(p.hasPermission("mcrpg.admin")) {
+						
+						if(classed_players.contains(target.getUniqueId().toString())) {
+							classed_players.remove(target.getUniqueId().toString());
+							mages.remove(target.getUniqueId().toString());
+							paladins.remove(target.getUniqueId().toString());
+							warriors.remove(target.getUniqueId().toString());
+							p.sendMessage(ChatColor.YELLOW + target.getName() + " has been removed from the class.");
+							target.sendMessage(ChatColor.YELLOW + "A admin has removed you from your class. You may choose again by doing /class <class>");
+						} else if(!classed_players.contains(target.getUniqueId().toString())) {
+							p.sendMessage(ChatColor.RED + target.getName() + " has not selected a class or has already been removed from the list.");
+						}
+						
+					} else {
+						p.sendMessage(ChatColor.RED + "§lYou do not have permission to do that.");
+					}
+				}
+				
+			}
+			else if(args.length > 2) {
+				p.sendMessage(ChatColor.RED + "Too many arguments! /class <class>");
+				p.sendMessage(ChatColor.RED + "Avalible classes: Warrior, Mage & Paladin");
 			}
 			return true;
 		}

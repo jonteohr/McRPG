@@ -42,11 +42,13 @@ public class McRPG extends JavaPlugin {
 		getCommand("spawn").setExecutor(new SimpleCommands(this));
 		getCommand("class").setExecutor(new Classes(this));
 		getCommand("gm").setExecutor(new GameMode(this));
+		getCommand("faction").setExecutor(new Factions(this));
 		plugin = this;
 		
 		getConfig().options().copyDefaults();
 		saveDefaultConfig();
 		saveDefaultPlayerLogging();
+		saveDefaultPlayerFactions();
 		
 		// Sword of a Thousand Truths
 		ItemStack stt = new ItemStack(Material.DIAMOND_SWORD, 1);
@@ -157,6 +159,9 @@ public class McRPG extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info("Disabling McRPG...");
 		getServer().clearRecipes();
+		saveDefaultConfig();
+		saveDefaultPlayerLogging();
+		saveDefaultPlayerFactions();
 	}
 	
 	
@@ -173,7 +178,8 @@ public class McRPG extends JavaPlugin {
 	    // Look for defaults in the jar
 	    InputStream defConfigStream = this.getResource("PlayerClasses.yml");
 	    if (defConfigStream != null) {
-	        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	        @SuppressWarnings("deprecation")
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 	        PlayerLogging.setDefaults(defConfig);
 	    }
 	}
@@ -202,6 +208,52 @@ public class McRPG extends JavaPlugin {
 	    }
 	    if (!PlayerLoggingFile.exists()) {            
 	         plugin.saveResource("PlayerClasses.yml", false);
+	     }
+	}
+	
+// 	PlayerFactions.YML
+	private FileConfiguration PlayerFactions = null;
+	private File PlayerFactionsFile = null;
+	
+	public void reloadPlayerFactions() {
+	    if (PlayerFactionsFile == null) {
+	    	PlayerFactionsFile = new File(getDataFolder(), "PlayerFactions.yml");
+	    }
+	    PlayerFactions = YamlConfiguration.loadConfiguration(PlayerFactionsFile);
+	 
+	    // Look for defaults in the jar
+	    InputStream defConfigStream = this.getResource("PlayerFactions.yml");
+	    if (defConfigStream != null) {
+	        @SuppressWarnings("deprecation")
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	        PlayerFactions.setDefaults(defConfig);
+	    }
+	}
+	
+	public FileConfiguration getPlayerFactions() {
+	    if (PlayerFactions == null) {
+	        reloadPlayerFactions();
+	    }
+	    return PlayerFactions;
+	}
+	
+	public void savePlayerFactions() {
+	    if (PlayerFactions == null || PlayerFactionsFile == null) {
+	        return;
+	    }
+	    try {
+	        getPlayerFactions().save(PlayerFactionsFile);
+	    } catch (IOException ex) {
+	        getLogger().log(Level.SEVERE, "Could not save config to " + PlayerFactionsFile, ex);
+	    }
+	}
+	
+	public void saveDefaultPlayerFactions() {
+	    if (PlayerFactionsFile == null) {
+	    	PlayerFactionsFile = new File(getDataFolder(), "PlayerFactions.yml");
+	    }
+	    if (!PlayerFactionsFile.exists()) {
+	         plugin.saveResource("PlayerFactions.yml", false);
 	     }
 	}
 	

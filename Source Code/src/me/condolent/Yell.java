@@ -40,12 +40,12 @@ public class Yell implements CommandExecutor {
 			} else if(getConfig().getString("admin_yell", "enable").equalsIgnoreCase("enable")) {
 				if(p.hasPermission("mcrpg.admin")) {
 					if(args.length < 1) {
-						p.sendMessage(ChatColor.YELLOW + "Usage: /y <message>");
+						p.sendMessage(ChatColor.RED + "Usage: /y <message>");
 					} else {
 						Bukkit.broadcastMessage(ChatColor.RED + p.getName() + " yells: " + message);
 					}
 				} else {
-					p.sendMessage(ChatColor.YELLOW + "That command is set to only be availible to admins.");
+					p.sendMessage(ChatColor.RED + "That command is set to only be availible to admins.");
 				}
 			}
 		}
