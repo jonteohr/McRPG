@@ -1,7 +1,7 @@
 McRPG
 =====
 
-![](http://dev.bukkit.org/media/images/70/886/logo_alpha.png)
+![](http://dev.bukkit.org/media/images/74/416/logo_beta.png)
 
 # Table of Contents:
 * [Overview](https://github.com/condolent/McRPG/blob/master/README.md#overview)
@@ -13,6 +13,8 @@ McRPG
  * [Permissions](https://github.com/condolent/McRPG/blob/master/README.md#permissions)
 * [Commands](https://github.com/condolent/McRPG/blob/master/README.md#commands)
  * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#classes)
+ * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#factions)
+* [To-do](https://github.com/condolent/McRPG/blob/master/README.md#to-do)
 * [Links](https://github.com/condolent/McRPG/blob/master/README.md#links)
 
 # Overview
@@ -26,7 +28,7 @@ with inspiration from World of Warcraft.
 * **New items** - Inspired from World of Warcraft, craftable and obtainable.
 * **Private whispers** - You can send player private whispers, only visible to the sender and receiver.
 * **Classes** - With different classes, you can choose what your character will become and what powers you will possess
-* **Factions** - With 2 different factions to choose, you can either become one of the fierce bad guys, or the team playing good guys! (Upcoming)
+* **Factions** - With 2 different factions to choose, you can either become one of the fierce bad guys, or the team playing good guys!
 
 _More features will be added as we implement them into the plugin_
 
@@ -107,6 +109,9 @@ _All commands are also listed by doing /rpg help_
 * **/gm <0/1/survival/creative> <player>** - Sets players gamemode.
 * **/setspawn** - Sets server-spawn.
 * **/spawn** - Teleports you to spawn.
+* **/faction <Horde/Alliance>** - Choose which faction you want to fight for!
+* **/faction deluser <player>** - Remove a player from the faction-log, making it possible to re-choose faction.
+* **/class deluser <player>** - Remove a player from the class-log, making it possible to re-choose class.
 
 ### Classes
 Here's all available classes listed:
@@ -114,6 +119,13 @@ Here's all available classes listed:
 * **Mage** - Play as a Mage, a wise wizard with magical powers.
 * **Paladin** - Follow the light's guidance and fight off your enemies with the power of the light!
 
+### Factions
+* **Horde** - Fight with brutality for the horde, for the magestive warchief Orgrim Doomhammer
+* **Alliance** - Fight honorably for the allmighty king Varian Wrynn
+
+# To-do
+* Different spawn for each classes
+* Powers for classes (Perhaps)
 
 # Links
 [**Forum**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/forum/)    
