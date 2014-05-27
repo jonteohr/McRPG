@@ -13,7 +13,7 @@ McRPG
  * [Permissions](https://github.com/condolent/McRPG/blob/master/README.md#permissions)
 * [Commands](https://github.com/condolent/McRPG/blob/master/README.md#commands)
  * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#classes)
- * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#factions)
+ * [Factions](https://github.com/condolent/McRPG/blob/master/README.md#factions)
 * [To-do](https://github.com/condolent/McRPG/blob/master/README.md#to-do)
 * [Links](https://github.com/condolent/McRPG/blob/master/README.md#links)
 
