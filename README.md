@@ -14,6 +14,7 @@ McRPG
 * [Commands](https://github.com/condolent/McRPG/blob/master/README.md#commands)
  * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#classes)
  * [Factions](https://github.com/condolent/McRPG/blob/master/README.md#factions)
+* [How to update](https://github.com/condolent/McRPG/blob/master/README.md#how-to-update)
 * [To-do](https://github.com/condolent/McRPG/blob/master/README.md#to-do)
 * [Links](https://github.com/condolent/McRPG/blob/master/README.md#links)
 
@@ -123,9 +124,23 @@ Here's all available classes listed:
 * **Horde** - Fight with brutality for the horde, for the magestive warchief Orgrim Doomhammer
 * **Alliance** - Fight honorably for the allmighty king Varian Wrynn
 
+# How to update
+This is the best way to update, follow these steps to update the plugin:
+ 1. Download the latest .jar file
+ 2. Copy everything inside your config.yml
+ 3. Place the new .jar file inside your //<server-folder\plugins\// folder and replace the old one
+ 4. Delete the current config.yml file
+ 5. Run the server (the plugin will now generate a new config-file that's up to date)
+ 6. Paste the copied (old) config.yml into a new notepad file
+ 7. Change the settings that's in the old to the new config file.
+
+**Q: Why is it so complicated?**    
+_A: Well since the plugin is still in development, we add a bunch of new things to the config-file almost after every update. The config file doesn't automatically update when the plugin does, therefor these steps are required to maintain the plugin in full capabilitiy_
+
 # To-do
 * Different spawn for each classes
 * Powers for classes (Perhaps)
+* Add gold (Currency)
 
 # Links
 [**Forum**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/forum/)    
