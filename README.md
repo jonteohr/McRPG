@@ -1,7 +1,7 @@
 McRPG
 =====
 
-![](http://dev.bukkit.org/media/images/74/417/logo_beta.png)
+![](http://dev.bukkit.org/media/images/74/432/logo_beta.png)
 
 # Table of Contents:
 * [Overview](https://github.com/condolent/McRPG/blob/master/README.md#overview)
