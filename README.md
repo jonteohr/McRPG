@@ -144,6 +144,7 @@ _All commands are also listed by doing /rpg help_
 * **/faction deluser <player>** - Remove a player from the faction-log, making it possible to re-choose faction.
 * **/class deluser <player>** - Remove a player from the class-log, making it possible to re-choose class.
 * **/vanish** - Toggles invisibility for you.
+* **/balance** - Shows your current gold-balance.
 
 ### Classes
 Here's all available classes listed:
