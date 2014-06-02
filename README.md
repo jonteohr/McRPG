@@ -11,7 +11,7 @@ McRPG
  * [Configuration codes](https://github.com/condolent/McRPG/blob/master/README.md#configuration-codes)
  * [Player logging](https://github.com/condolent/McRPG/blob/master/README.md#player-logging)
  * [Permissions](https://github.com/condolent/McRPG/blob/master/README.md#permissions)
- * [Auto-Updating](https://github.com/condolent/McRPG/blob/master/README.md#Auto-updating)
+ * [Auto-Updating](https://github.com/condolent/McRPG/blob/master/README.md#auto-updating)
 * [Commands](https://github.com/condolent/McRPG/blob/master/README.md#commands)
  * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#classes)
  * [Factions](https://github.com/condolent/McRPG/blob/master/README.md#factions)
