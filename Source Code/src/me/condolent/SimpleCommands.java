@@ -8,6 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class SimpleCommands implements CommandExecutor {
 	
@@ -92,6 +94,22 @@ public class SimpleCommands implements CommandExecutor {
 			p.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 1);
 			
 			return true;
+		}
+		
+		if(cmd.getName().equalsIgnoreCase("vanish")) {
+			if(p.hasPermission("mcrpg.admin")) {
+				if(p.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+					p.removePotionEffect(PotionEffectType.INVISIBILITY);
+					p.sendMessage(ChatColor.GREEN + "§lYou are no longer invisible!");
+				}
+				else if(!p.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+					p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 60000, 120));
+					p.sendMessage(ChatColor.AQUA + "§lYou are now invisible!");
+					p.sendMessage(ChatColor.AQUA + "§lType §n/vanish§r" + ChatColor.AQUA + " §lagain to become visible.");
+				}
+			} else {
+				p.sendMessage(ChatColor.RED + "§lYou're not allowed to do that.");
+			}
 		}
 		
 		return false;

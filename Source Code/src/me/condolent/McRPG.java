@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.logging.Level;
 
+import net.gravitydevelopment.updater.Updater;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,21 +18,28 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class McRPG extends JavaPlugin {
 	
 	public Permission admin = new Permission("mcrpg.admin");
-	
+	public Permission moderator = new Permission("mcrpg.moderator");
+
 	private static Plugin plugin;
-	
 	public static Plugin getPlugin() {
 		return plugin;
 	}
 	
+	Events events;
+	
+	PluginDescriptionFile pdf = getDescription();
+	
 	public void onEnable() {
 		getLogger().info("McRPG successfully enabled! :)");
 		this.getServer().getPluginManager().registerEvents(new Events(this), this);
+		
+		
 		
 		getCommand("supply").setExecutor(new SupplyItems(this));
 		getCommand("rpg").setExecutor(new RpgCmd(this));
@@ -40,15 +49,28 @@ public class McRPG extends JavaPlugin {
 		getCommand("ci").setExecutor(new SimpleCommands(this));
 		getCommand("setspawn").setExecutor(new SimpleCommands(this));
 		getCommand("spawn").setExecutor(new SimpleCommands(this));
+		getCommand("vanish").setExecutor(new SimpleCommands(this));
 		getCommand("class").setExecutor(new Classes(this));
 		getCommand("gm").setExecutor(new GameMode(this));
 		getCommand("faction").setExecutor(new Factions(this));
+		getCommand("balance").setExecutor(new Currency(this));
+		getCommand("sell").setExecutor(new Currency(this));
 		plugin = this;
 		
 		getConfig().options().copyDefaults();
 		saveDefaultConfig();
 		saveDefaultPlayerLogging();
 		saveDefaultPlayerFactions();
+		saveDefaultPlayerCurrency();
+
+		if(getConfig().getString("auto_update", "disable").equalsIgnoreCase("disable")) {
+			getLogger().info("New version of McRPG is available for download! Go to http://bit.ly/1gR7UqV to download!");
+			@SuppressWarnings("unused")
+			Updater updater = new Updater(this, 75582, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);
+		} else if(getConfig().getString("auto_update", "enable").equalsIgnoreCase("enable")) {
+			@SuppressWarnings("unused")
+			Updater updater = new Updater(this, 75582, this.getFile(), Updater.UpdateType.DEFAULT, true);
+		}
 		
 		// Sword of a Thousand Truths
 		ItemStack stt = new ItemStack(Material.DIAMOND_SWORD, 1);
@@ -145,6 +167,8 @@ public class McRPG extends JavaPlugin {
 		ShapedRecipe rplatepvechest = new ShapedRecipe(platepvechest);
 		rplatepvechest.shape("   ", " # ", "   ").setIngredient('#', Material.DIAMOND_CHESTPLATE);
 		
+		
+		
 		// Add recipes
 		getServer().addRecipe(rplatepvechest);
 		getServer().addRecipe(rplatepvehead);
@@ -162,7 +186,10 @@ public class McRPG extends JavaPlugin {
 		saveDefaultConfig();
 		saveDefaultPlayerLogging();
 		saveDefaultPlayerFactions();
+		saveDefaultPlayerCurrency();
 	}
+	
+	
 	
 	
 	// 	PlayerClasses.YML
@@ -255,6 +282,58 @@ public class McRPG extends JavaPlugin {
 	    if (!PlayerFactionsFile.exists()) {
 	         plugin.saveResource("PlayerFactions.yml", false);
 	     }
+	}
+	
+// 	PlayerCurrency.YML
+	private FileConfiguration PlayerCurrency = null;
+	private File PlayerCurrencyFile = null;
+	
+	public void reloadPlayerCurrency() {
+	    if (PlayerCurrencyFile == null) {
+	    	PlayerCurrencyFile = new File(getDataFolder(), "PlayerCurrency.yml");
+	    }
+	    PlayerCurrency = YamlConfiguration.loadConfiguration(PlayerCurrencyFile);
+	 
+	    // Look for defaults in the jar
+	    InputStream defConfigStream = this.getResource("PlayerCurrency.yml");
+	    if (defConfigStream != null) {
+	        @SuppressWarnings("deprecation")
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	        PlayerCurrency.setDefaults(defConfig);
+	    }
+	}
+	
+	public FileConfiguration getPlayerCurrency() {
+	    if (PlayerCurrency == null) {
+	        reloadPlayerCurrency();
+	    }
+	    return PlayerCurrency;
+	}
+	
+	public void savePlayerCurrency() {
+	    if (PlayerCurrency == null || PlayerCurrencyFile == null) {
+	        return;
+	    }
+	    try {
+	        getPlayerCurrency().save(PlayerCurrencyFile);
+	    } catch (IOException ex) {
+	        getLogger().log(Level.SEVERE, "Could not save config to " + PlayerCurrencyFile, ex);
+	    }
+	}
+	
+	public void saveDefaultPlayerCurrency() {
+	    if (PlayerCurrencyFile == null) {
+	    	PlayerCurrencyFile = new File(getDataFolder(), "PlayerCurrency.yml");
+	    }
+	    if (!PlayerCurrencyFile.exists()) {
+	         plugin.saveResource("PlayerCurrency.yml", false);
+	     }
+	}
+	
+	
+	// GET UPDATER CLASS
+	public void getUpdater() {
+		this.getUpdater();
 	}
 	
 }

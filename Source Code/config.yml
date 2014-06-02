@@ -2,14 +2,29 @@
 # Read through and change what's needed before publicing on your server for other players!
 # To disable something, change the 'enable' to 'disable' vice versa.
 
-# Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
-admin_yell: 'disable'
+# AUTO-UPDATE
+# Do you want the plugin to update automatically if there's an update available everytime you reload?
+# disable = No
+# enable = Yes
+auto_update: disable
 
 # Send the player a welcome-message when joining?
 # If enable it will send the player a message
-welcome_msg: 'enable'
+welcome_msg: enable
 
 # If welcome_msg is 'enable', then what should the message be?
 # %player% is playername.
 # To use colors, type & and then the COLOR CODE. Find all at: http://minecraft.gamepedia.com/Formatting_codes#Color_codes
 MOTD: '&6&oDarion whispers: Welcome to the server, %player%.'
+
+
+##################################
+# 			  CHAT               #
+##################################
+
+# This is for enabling or disabling the colors in chat, for instance if someone types &2Hello it will show the message in green.
+# Disabling this will NOT disable the colors for other messages, such as MOTD or other plugin messages. Only player-sent messages.
+chat_colors: enable
+
+# Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
+admin_yell: disable

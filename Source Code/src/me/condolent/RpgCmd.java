@@ -54,13 +54,14 @@ public class RpgCmd implements CommandExecutor {
 						plugin.reloadConfig();
 						plugin.reloadPlayerLogging();
 						plugin.reloadPlayerFactions();
+						plugin.reloadPlayerCurrency();
 						p.sendMessage(ChatColor.YELLOW + "Configuration-files reloaded!");
 					} else {
 						p.sendMessage(ChatColor.RED + "§lNot permitted to do this!");
 					}
 				}
 				if(args[0].equalsIgnoreCase("version")) {
-					p.sendMessage(ChatColor.YELLOW + "You're running McRPG version " + pdf.getVersion());
+					p.sendMessage(ChatColor.YELLOW + "You're running McRPG version Beta-" + pdf.getVersion());
 				}
 				if(args[0].equalsIgnoreCase("update")) {
 					p.sendMessage(ChatColor.YELLOW + "http://giantfall.net/mcrpg - McRPG official website.");
@@ -76,6 +77,7 @@ public class RpgCmd implements CommandExecutor {
 						p.sendMessage(ChatColor.YELLOW + "/ci <player> §o- Clears the inventory of the player. (Gear is not affected)");
 						p.sendMessage(ChatColor.YELLOW + "/faction deluser <user> §o- Removes a user from his/her faction, making it re-selectable.");
 						p.sendMessage(ChatColor.YELLOW + "/class deluser <user> §o- Deletes a user from her/his class, making it re-selectable.");
+						p.sendMessage(ChatColor.YELLOW + "/vanish §o- Toggles invisibility.");
 					}
 					p.sendMessage(ChatColor.YELLOW + "/rpg version §o - Shows which version of McRPG you're running.");
 					p.sendMessage(ChatColor.YELLOW + "/w <player> <message> §o- Sends a whisper to specified online player.");

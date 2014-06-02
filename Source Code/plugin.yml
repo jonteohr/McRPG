@@ -1,5 +1,5 @@
 name: McRPG
-version: Beta 1.0
+version: 1.1
 author: Condolent, Axel1811
 main: me.condolent.McRPG
 commands:
@@ -25,6 +25,12 @@ commands:
       description: Teleports the player to spawn.
    faction:
       description: Choose your faction.
+   balance:
+      description: Shows your current balance.
+   vanish:
+      description: Makes you invisible for 2 minutes.
+   sell:
+      description: Sell the item in your hand!
 
 permissions:
    mcrpg.admin:

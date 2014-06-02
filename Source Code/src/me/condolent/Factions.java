@@ -1,6 +1,7 @@
 package me.condolent;
 
 import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -20,6 +21,10 @@ public class Factions implements CommandExecutor {
 	
 	public FileConfiguration getFactionsLog() {
 		return plugin.getPlayerFactions();
+	}
+	
+	public FileConfiguration getPlayerCurrency() {
+		return plugin.getPlayerCurrency();
 	}
 	
 	
