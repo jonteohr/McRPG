@@ -11,6 +11,7 @@ McRPG
  * [Configuration codes](https://github.com/condolent/McRPG/blob/master/README.md#configuration-codes)
  * [Player logging](https://github.com/condolent/McRPG/blob/master/README.md#player-logging)
  * [Permissions](https://github.com/condolent/McRPG/blob/master/README.md#permissions)
+ * [Auto-Updating](https://github.com/condolent/McRPG/blob/master/README.md#Auto-updating)
 * [Commands](https://github.com/condolent/McRPG/blob/master/README.md#commands)
  * [Classes](https://github.com/condolent/McRPG/blob/master/README.md#classes)
  * [Factions](https://github.com/condolent/McRPG/blob/master/README.md#factions)
@@ -43,17 +44,32 @@ This is how the configuration-file looks like:
 # Read through and change what's needed before publicing on your server for other players!
 # To disable something, change the 'enable' to 'disable' vice versa.
 
-# Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
-admin_yell: 'disable'
+# AUTO-UPDATE
+# Do you want the plugin to update automatically if there's an update available everytime you reload?
+# disable = No
+# enable = Yes
+auto_update: disable
 
 # Send the player a welcome-message when joining?
 # If enable it will send the player a message
-welcome_msg: 'enable'
+welcome_msg: enable
 
 # If welcome_msg is 'enable', then what should the message be?
 # %player% is playername.
 # To use colors, type & and then the COLOR CODE. Find all at: http://minecraft.gamepedia.com/Formatting_codes#Color_codes
-MOTD: '&6&oDarion whispers: Welcome back, %player%.'
+MOTD: '&6&oDarion whispers: Welcome to the server, %player%.'
+
+
+##################################
+# 			  CHAT               #
+##################################
+
+# This is for enabling or disabling the colors in chat, for instance if someone types &2Hello it will show the message in green.
+# Disabling this will NOT disable the colors for other messages, such as MOTD or other plugin messages. Only player-sent messages.
+chat_colors: enable
+
+# Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
+admin_yell: disable
 ```
 And it is fairly simple to set it up.
 It also gives a fair explanation of everything inside the config!
@@ -70,9 +86,9 @@ There's a few codes added into the configuration to make it much more cooler! (L
 ``&<color>`` makes the following a certain color. All color codes are found at [the Minecraft Gamepedia](http://minecraft.gamepedia.com/Formatting_codes#Color_codes)
 
 ### Player logging
-The plugin logs players when they choose factions and classes. This is logged in 2 separate files. Classes are logged in the _plugin\McRPG\PlayerClasses.yml_ file and factions in the _plugins\McRPG\PlayerFactions.yml_.   
+The plugin logs players when they choose factions and classes. This is logged in 2 separate files. Classes are logged in the _plugins\McRPG\PlayerClasses.yml_ file and factions in the _plugins\McRPG\PlayerFactions.yml_.   
 
-This is the _plugin\McRPG\PlayerClasses.yml_    
+This is the _plugins\McRPG\PlayerClasses.yml_    
 ```
 # You can edit this, simply delete users that you want to be able to choose class again!
 mages: []
@@ -91,12 +107,26 @@ classed_players:
  - Condolent
 ```
 It's fairly easy to remove a player that's been logged.    
-**The factions have still not been implemented into a release of the plugin, it's currently being worked on and therefor I cannot show you how it looks like!**
+This is the _plugins\McRPG\PlayerFactions.yml_
+```
+# You can edit this, simply delete users that you want to be able to choose factions again!
+# Players are no longer logged with their names, because of the new name change feature Mojang added to Minecraft.
+# Therefor players' UUID are logged instead, because of that it's not change-able.
+
+Horde: []
+Alliance: []
+Registered_Players: []
+```
 
 ### Permissions
 | Node  | Gives |
 | ------------- | ------------- |
 | mcrpg.admin  | Access to admin-related commands  |
+
+### Auto-Updating
+Auto updating is when the plugin is automatically dowmloading a new update if there is one on BukkitDev. This is disabled by default, but can easily be changed in the config-file.   
+If it remains disabled, it will still send a message to server operators when logging in that there's a new update available and send a link. It also says that in the console on start-up.   
+If enabled, it will download when starting up the server. **Remember to reload the server after the automatic-update is finished!**
 
 # Commands
 _All commands are also listed by doing /rpg help_
@@ -113,6 +143,7 @@ _All commands are also listed by doing /rpg help_
 * **/faction <Horde/Alliance>** - Choose which faction you want to fight for!
 * **/faction deluser <player>** - Remove a player from the faction-log, making it possible to re-choose faction.
 * **/class deluser <player>** - Remove a player from the class-log, making it possible to re-choose class.
+* **/vanish** - Toggles invisibility for you.
 
 ### Classes
 Here's all available classes listed:
@@ -140,7 +171,6 @@ _A: Well since the plugin is still in development, we add a bunch of new things 
 # To-do
 * Different spawn for each classes
 * Powers for classes (Perhaps)
-* Add gold (Currency)
 
 # Links
 [**Forum**](http://dev.bukkit.org/bukkit-plugins/mc-rpg/forum/)    
