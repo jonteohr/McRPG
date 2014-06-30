@@ -84,6 +84,7 @@ public class RpgCmd implements CommandExecutor {
 					p.sendMessage(ChatColor.YELLOW + "/y <message> §o- Sends out a server-wide yell.");
 					p.sendMessage(ChatColor.YELLOW + "/class <class> §o- Choose which class you want to play as.");
 					p.sendMessage(ChatColor.YELLOW + "/rpg uuid <player> §o- Gets the specified player's UUID (Unique User Identification).");
+					p.sendMessage(ChatColor.YELLOW + "/achievement §o- Shows the achievement-menu.");
 				}
 			}
 			if(args.length > 1) {

@@ -1,18 +1,10 @@
 package me.condolent;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-
-import net.gravitydevelopment.updater.Updater;
-
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -20,8 +12,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class Events implements Listener {
 	
 	McRPG plugin;
-	
-	Updater updaterclass;
 	
 	public Events(McRPG instance) {
 		plugin = instance;
@@ -46,6 +36,7 @@ public class Events implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
+		String UUID = p.getUniqueId().toString();
 		
 		e.setJoinMessage(ChatColor.YELLOW + p.getName() + " joined the game");
 		
@@ -57,6 +48,7 @@ public class Events implements Listener {
 		if(!getPlayerCurrency().contains(p.getUniqueId().toString())) {
 			getPlayerCurrency().set(p.getUniqueId().toString(), 0);
 		}
+		
 		if(p.hasPlayedBefore() == false) {
 			p.sendMessage(ChatColor.GREEN + "Choose your class by typing");
 			p.sendMessage(ChatColor.AQUA + "§l/class <Mage/Paladin/Warrior>");
@@ -65,23 +57,11 @@ public class Events implements Listener {
 			p.sendMessage(ChatColor.AQUA + "§l/faction <Alliance/Horde>");
 		}
 		
-		if(p.isOp()) {
-			    try {
-			        URL verfile = new URL("https://raw.githubusercontent.com/condolent/McRPG/master/Source%20Code/version.txt");
-			        BufferedReader in = new BufferedReader(
-			        new InputStreamReader(verfile.openStream()));
-			        String newVersion = in.readLine();
-			        in.close();
-			        String oldVersion = plugin.pdf.getVersion();
-			                 
-			        if (newVersion != null && ! newVersion.equalsIgnoreCase(oldVersion)) {
-			            p.sendMessage("§l[" + ChatColor.RED + "§lWARNING!" + "§r§l]§r " + ChatColor.LIGHT_PURPLE + "§oYou're running an outdated version of McRPG. Version " + newVersion.toString() + ChatColor.LIGHT_PURPLE +  " §ois available at: " + ChatColor.AQUA + "§ohttp://bit.ly/1gR7UqV");
-			            plugin.getLogger().info("McRPG version " + newVersion.toString() + " is available for download! Go to http://bit.ly/1gR7UqV to download!");
-			        	}
-			        }
-			    catch (IOException ex) {
-			        // Ignore any problems that may happen
-			    }
+		if(!getPlayerCurrency().contains(UUID)) {
+			getPlayerCurrency().set(UUID, 0);
+			plugin.savePlayerCurrency();
+		} else {
+			
 		}
 	}
 	
@@ -101,75 +81,6 @@ public class Events implements Listener {
 	
 	
 	// CHAT-FORMATTING
-	@EventHandler
-	public void onChat(AsyncPlayerChatEvent e) {
-		Player p = e.getPlayer();
-		
-		if(getConfig().getString("chat_colors", "enable").equalsIgnoreCase("enable")) {
-			String message = e.getMessage().replaceAll("&", "§");
-			e.setMessage(message);
-		}
-		if(getConfig().getString("chat_colors", "disable").equalsIgnoreCase("disable")) {
-
-		}
-		
-		if(!p.isOp()) {
-			e.setFormat(ChatColor.GRAY + "[%s] says: %s");
-			
-			// IF HORDE
-			if(getPlayerFactions().getStringList("Horde").contains(p.getUniqueId().toString())) {
-				e.setFormat(ChatColor.RED + "§l[H] " + ChatColor.WHITE + "§r[%s] says: %s");
-				
-				if(getPlayerClass().getStringList("Warriors").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.RED + "§l[H] " + ChatColor.GREEN + "(Warrior)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Paladins").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.RED + "§l[H] " + ChatColor.GREEN + "(Paladin)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Mages").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.RED + "§l[H] " + ChatColor.GREEN + "(Mage)" + ChatColor.WHITE + "[%s] says: %s");
-				}
-			}
-			// IF ALLIANCE
-			if(getPlayerFactions().getStringList("Alliance").contains(p.getUniqueId().toString())) {
-				e.setFormat(ChatColor.AQUA + "§l[A] " + ChatColor.WHITE + "§r[%s] says: %s");
-				
-				if(getPlayerClass().getStringList("Warriors").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.AQUA + "§l[A] " + ChatColor.GREEN + "(Warrior)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Paladins").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.AQUA + "§l[A] " + ChatColor.GREEN + "(Paladin)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Mages").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.AQUA + "§l[A] " + ChatColor.GREEN + "(Mage)" + ChatColor.WHITE + "[%s] says: %s");
-				}
-			}
-		}
-		
-		if(p.isOp()) {
-			e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.WHITE + "[%s] says: %s");
-			
-			// IF HORDE
-			if(getPlayerFactions().getStringList("Horde").contains(p.getUniqueId().toString())) {
-				e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.RED + "§l[H] " + ChatColor.WHITE + "§r[%s] says: %s");
-				
-				if(getPlayerClass().getStringList("Warriors").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.RED + "§l[H] " + ChatColor.GREEN + "(Warrior)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Paladins").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.RED + "§l[H] " + ChatColor.GREEN + "(Paladin)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Mages").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.RED + "§l[H] " + ChatColor.GREEN + "(Mage)" + ChatColor.WHITE + "[%s] says: %s");
-				}
-			}
-			// IF ALLIANCE
-			if(getPlayerFactions().getStringList("Alliance").contains(p.getUniqueId().toString())) {
-				e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.AQUA + "§l[A] " + ChatColor.WHITE + "§r[%s] says: %s");
-				
-				if(getPlayerClass().getStringList("Warriors").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.AQUA + "§l[A] " + ChatColor.GREEN + "(Warrior)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Paladins").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.AQUA + "§l[A] " + ChatColor.GREEN + "(Paladin)" + ChatColor.WHITE + "[%s] says: %s");
-				} else if(getPlayerClass().getStringList("Mages").contains(p.getUniqueId().toString())) {
-					e.setFormat(ChatColor.DARK_AQUA + "[GM] " + ChatColor.AQUA + "§l[A] " + ChatColor.GREEN + "(Mage)" + ChatColor.WHITE + "[%s] says: %s");
-				}
-			}
-		}
-	}
+	
 
 }

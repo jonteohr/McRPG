@@ -7,12 +7,17 @@ import java.util.Arrays;
 import java.util.logging.Level;
 
 import net.gravitydevelopment.updater.Updater;
+import net.gravitydevelopment.updater.Updater.UpdateResult;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,7 +26,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class McRPG extends JavaPlugin {
+public class McRPG extends JavaPlugin implements Listener {
 	
 	public Permission admin = new Permission("mcrpg.admin");
 	public Permission moderator = new Permission("mcrpg.moderator");
@@ -38,6 +43,9 @@ public class McRPG extends JavaPlugin {
 	public void onEnable() {
 		getLogger().info("McRPG successfully enabled! :)");
 		this.getServer().getPluginManager().registerEvents(new Events(this), this);
+		this.getServer().getPluginManager().registerEvents(new Achievement(this), this);
+		this.getServer().getPluginManager().registerEvents(this, this);
+		this.getServer().getPluginManager().registerEvents(new Chat(this), this);
 		
 		
 		
@@ -55,6 +63,7 @@ public class McRPG extends JavaPlugin {
 		getCommand("faction").setExecutor(new Factions(this));
 		getCommand("balance").setExecutor(new Currency(this));
 		getCommand("sell").setExecutor(new Currency(this));
+		getCommand("achievement").setExecutor(new Achievement(this));
 		plugin = this;
 		
 		getConfig().options().copyDefaults();
@@ -62,14 +71,18 @@ public class McRPG extends JavaPlugin {
 		saveDefaultPlayerLogging();
 		saveDefaultPlayerFactions();
 		saveDefaultPlayerCurrency();
+		saveDefaultPlayerAchievements();
 
-		if(getConfig().getString("auto_update", "disable").equalsIgnoreCase("disable")) {
-			getLogger().info("New version of McRPG is available for download! Go to http://bit.ly/1gR7UqV to download!");
-			@SuppressWarnings("unused")
+		if(getConfig().getString("auto_update", "notify").equalsIgnoreCase("notify")) {
 			Updater updater = new Updater(this, 75582, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);
-		} else if(getConfig().getString("auto_update", "enable").equalsIgnoreCase("enable")) {
+			if(updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
+				getLogger().info("A new version is available! " + updater.getLatestName());
+			}
+		} else if(getConfig().getString("auto_update", "auto").equalsIgnoreCase("auto")) {
 			@SuppressWarnings("unused")
 			Updater updater = new Updater(this, 75582, this.getFile(), Updater.UpdateType.DEFAULT, true);
+		} else if(getConfig().getString("auto_update", "disable").equalsIgnoreCase("disable")) {
+			
 		}
 		
 		// Sword of a Thousand Truths
@@ -187,6 +200,25 @@ public class McRPG extends JavaPlugin {
 		saveDefaultPlayerLogging();
 		saveDefaultPlayerFactions();
 		saveDefaultPlayerCurrency();
+		saveDefaultPlayerAchievements();
+	}
+	
+	@EventHandler
+	public void onJoin(PlayerJoinEvent e) {
+		Player p = e.getPlayer();
+		
+		if(p.isOp()) {
+			if(getConfig().getString("auto_update", "notify").equalsIgnoreCase("notify")) {
+				Updater updater = new Updater(this, 75582, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);
+				if(updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
+					p.sendMessage("§l[" + ChatColor.RED + "§lWARNING" + ChatColor.WHITE + "§l] " + ChatColor.LIGHT_PURPLE + "You're running an outdated version of §lMcRPG§r" + ChatColor.LIGHT_PURPLE + ". " + updater.getLatestName() + " is available for download at: " + ChatColor.AQUA + updater.getLatestFileLink());
+				}
+			} else if(getConfig().getString("auto_update", "auto").equalsIgnoreCase("auto")) {
+				
+			} else if(getConfig().getString("auto_update", "disable").equalsIgnoreCase("disable")) {
+				
+			}
+		}
 	}
 	
 	
@@ -330,10 +362,50 @@ public class McRPG extends JavaPlugin {
 	     }
 	}
 	
+// 	PlayerAchievements.YML
+	private FileConfiguration PlayerAchievements = null;
+	private File PlayerAchievementsFile = null;
 	
-	// GET UPDATER CLASS
-	public void getUpdater() {
-		this.getUpdater();
+	public void reloadPlayerAchievements() {
+	    if (PlayerAchievementsFile == null) {
+	    	PlayerAchievementsFile = new File(getDataFolder(), "PlayerAchievements.yml");
+	    }
+	    PlayerAchievements = YamlConfiguration.loadConfiguration(PlayerAchievementsFile);
+	 
+	    // Look for defaults in the jar
+	    InputStream defConfigStream = this.getResource("PlayerAchievements.yml");
+	    if (defConfigStream != null) {
+	        @SuppressWarnings("deprecation")
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	        PlayerAchievements.setDefaults(defConfig);
+	    }
+	}
+	
+	public FileConfiguration getPlayerAchievements() {
+	    if (PlayerAchievements == null) {
+	        reloadPlayerAchievements();
+	    }
+	    return PlayerAchievements;
+	}
+	
+	public void savePlayerAchievements() {
+	    if (PlayerAchievements == null || PlayerAchievementsFile == null) {
+	        return;
+	    }
+	    try {
+	        getPlayerAchievements().save(PlayerAchievementsFile);
+	    } catch (IOException ex) {
+	        getLogger().log(Level.SEVERE, "Could not save config to " + PlayerAchievementsFile, ex);
+	    }
+	}
+	
+	public void saveDefaultPlayerAchievements() {
+	    if (PlayerAchievementsFile == null) {
+	    	PlayerAchievementsFile = new File(getDataFolder(), "PlayerAchievements.yml");
+	    }
+	    if (!PlayerAchievementsFile.exists()) {
+	         plugin.saveResource("PlayerAchievements.yml", false);
+	     }
 	}
 	
 }

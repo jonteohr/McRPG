@@ -27,24 +27,12 @@ public class Currency implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
-		
-		//List<String> balance = getPlayerCurrency().getStringList("player_balances");
-		//getPlayerCurrency().set("player_balances", balance);
-		//plugin.savePlayerCurrency();
+		String UUID = p.getUniqueId().toString();
 		
 		if(cmd.getName().equalsIgnoreCase("balance")) {
-
-			if(!getPlayerCurrency().contains(p.getUniqueId().toString())) {
-				p.sendMessage(ChatColor.RED + "You were not registered!");
-				p.sendMessage(ChatColor.GREEN + "§oAdding your UUID to the log... Do /balance again to see your amount of gold.");
-				
-				getPlayerCurrency().set(p.getUniqueId().toString(), 0);
-				plugin.savePlayerCurrency();
-				
-			}
 			
-			else if(getPlayerCurrency().contains(p.getUniqueId().toString())) {
-				p.sendMessage(ChatColor.GOLD + "You have: §l" + getPlayerCurrency().getString(p.getUniqueId().toString()) + " gold.");
+			if(getPlayerCurrency().contains(UUID)) {
+				p.sendMessage(ChatColor.GOLD + "You have: §l" + getPlayerCurrency().getString(UUID) + " gold.");
 			}
 			
 			return true;
@@ -57,7 +45,7 @@ public class Currency implements CommandExecutor {
 			}
 			
 			if(args.length == 1) {
-				p.sendMessage("hi");
+				p.sendMessage(ChatColor.RED + "§oComing soon...");
 			}
 			
 		}

@@ -65,6 +65,7 @@ public class Classes implements CommandExecutor {
 		ItemStack paladinlegs = new ItemStack(Material.IRON_LEGGINGS, 1);
 		ItemMeta mpaladinlegs = paladinlegs.getItemMeta();
 		mpaladinlegs.setDisplayName(ChatColor.GRAY + "Father's Old Legguards");
+		paladinlegs.setDurability((short) 4);
 		paladinlegs.setItemMeta(mpaladinlegs);
 		
 		
@@ -130,6 +131,10 @@ public class Classes implements CommandExecutor {
 			if(args.length == 2) {
 				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getServer().getPlayerExact(args[1]);
+				if(target == null) {
+					p.sendMessage(ChatColor.RED + "Player " + args[1] + " could not be found.");
+					return true;
+				}
 				if(args[0].equalsIgnoreCase("deluser")) {
 					if(p.hasPermission("mcrpg.admin")) {
 						
@@ -140,6 +145,7 @@ public class Classes implements CommandExecutor {
 							warriors.remove(target.getUniqueId().toString());
 							p.sendMessage(ChatColor.YELLOW + target.getName() + " has been removed from the class.");
 							target.sendMessage(ChatColor.YELLOW + "A admin has removed you from your class. You may choose again by doing /class <class>");
+							plugin.savePlayerLogging();
 						} else if(!classed_players.contains(target.getUniqueId().toString())) {
 							p.sendMessage(ChatColor.RED + target.getName() + " has not selected a class or has already been removed from the list.");
 						}

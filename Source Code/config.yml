@@ -4,9 +4,10 @@
 
 # AUTO-UPDATE
 # Do you want the plugin to update automatically if there's an update available everytime you reload?
-# disable = No
-# enable = Yes
-auto_update: disable
+# auto = Will download the latest update if you're running a outdated one automatically.
+# notify = Will not download anything, but will tell you if there's a new version available.
+# disable = Will not do anything.
+auto_update: notify
 
 # Send the player a welcome-message when joining?
 # If enable it will send the player a message
@@ -28,3 +29,12 @@ chat_colors: enable
 
 # Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
 admin_yell: disable
+
+# This will set how the chat is displayed. You can set where the username is supposed to be and in what color anything should be in.
+# Below are some variables that might help you formatting the chat.
+# %player% = Playername
+# %message% = The message itself
+# %faction% = The player's faction
+# %class% = The player's class
+# %op% = OP-prefix. (Only shows if player is OP).
+chat_formatting: '%op% %faction% &a%class%§r[%player%] says: %message%'

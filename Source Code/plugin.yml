@@ -1,5 +1,5 @@
 name: McRPG
-version: 1.1
+version: 1.2
 author: Condolent, Axel1811
 main: me.condolent.McRPG
 commands:
@@ -31,6 +31,10 @@ commands:
       description: Makes you invisible for 2 minutes.
    sell:
       description: Sell the item in your hand!
+   achievement:
+      description: Show a list of achievements.
+   admin:
+      description: Opens up a admin menu.
 
 permissions:
    mcrpg.admin:
