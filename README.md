@@ -46,9 +46,10 @@ This is how the configuration-file looks like:
 
 # AUTO-UPDATE
 # Do you want the plugin to update automatically if there's an update available everytime you reload?
-# disable = No
-# enable = Yes
-auto_update: disable
+# auto = Will download the latest update if you're running a outdated one automatically.
+# notify = Will not download anything, but will tell you if there's a new version available.
+# disable = Will not do anything.
+auto_update: notify
 
 # Send the player a welcome-message when joining?
 # If enable it will send the player a message
@@ -70,6 +71,15 @@ chat_colors: enable
 
 # Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
 admin_yell: disable
+
+# This will set how the chat is displayed. You can set where the username is supposed to be and in what color anything should be in.
+# Below are some variables that might help you formatting the chat.
+# %player% = Playername
+# %message% = The message itself
+# %faction% = The player's faction
+# %class% = The player's class
+# %op% = OP-prefix. (Only shows if player is OP).
+chat_formatting: '%op% %faction% &a%class%§r[%player%] says: %message%'
 ```
 And it is fairly simple to set it up.
 It also gives a fair explanation of everything inside the config!
@@ -145,6 +155,7 @@ _All commands are also listed by doing /rpg help_
 * **/class deluser <player>** - Remove a player from the class-log, making it possible to re-choose class.
 * **/vanish** - Toggles invisibility for you.
 * **/balance** - Shows your current gold-balance.
+* **/achievement** - Opens up the achievement-list.
 
 ### Classes
 Here's all available classes listed:
