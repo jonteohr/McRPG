@@ -55,6 +55,7 @@ public class RpgCmd implements CommandExecutor {
 						plugin.reloadPlayerLogging();
 						plugin.reloadPlayerFactions();
 						plugin.reloadPlayerCurrency();
+						plugin.reloadPlayerAchievements();
 						p.sendMessage(ChatColor.YELLOW + "Configuration-files reloaded!");
 					} else {
 						p.sendMessage(ChatColor.RED + "§lNot permitted to do this!");
@@ -64,7 +65,7 @@ public class RpgCmd implements CommandExecutor {
 					p.sendMessage(ChatColor.YELLOW + "You're running McRPG version Beta-" + pdf.getVersion());
 				}
 				if(args[0].equalsIgnoreCase("update")) {
-					p.sendMessage(ChatColor.YELLOW + "http://giantfall.net/mcrpg - McRPG official website.");
+					p.sendMessage(ChatColor.YELLOW + "http://dev.bukkit.org/bukkit-plugins/mc-rpg/ - McRPG official project-page.");
 				}
 				if(args[0].equalsIgnoreCase("help")) {
 					if(p.hasPermission("mcrpg.admin")) {
@@ -78,10 +79,14 @@ public class RpgCmd implements CommandExecutor {
 						p.sendMessage(ChatColor.YELLOW + "/faction deluser <user> §o- Removes a user from his/her faction, making it re-selectable.");
 						p.sendMessage(ChatColor.YELLOW + "/class deluser <user> §o- Deletes a user from her/his class, making it re-selectable.");
 						p.sendMessage(ChatColor.YELLOW + "/vanish §o- Toggles invisibility.");
+						p.sendMessage(ChatColor.YELLOW + "/setspawn §o- Sets spawn for non-faction specified players.");
+						p.sendMessage(ChatColor.YELLOW + "/setspawn alliance §o- Sets spawn for the Alliance.");
+						p.sendMessage(ChatColor.YELLOW + "/setspawn horde §o- Sets spawn for the Horde.");
 					}
 					p.sendMessage(ChatColor.YELLOW + "/rpg version §o - Shows which version of McRPG you're running.");
 					p.sendMessage(ChatColor.YELLOW + "/w <player> <message> §o- Sends a whisper to specified online player.");
 					p.sendMessage(ChatColor.YELLOW + "/y <message> §o- Sends out a server-wide yell.");
+					p.sendMessage(ChatColor.YELLOW + "/spawn §o- Teleports you to spawn.");
 					p.sendMessage(ChatColor.YELLOW + "/class <class> §o- Choose which class you want to play as.");
 					p.sendMessage(ChatColor.YELLOW + "/rpg uuid <player> §o- Gets the specified player's UUID (Unique User Identification).");
 					p.sendMessage(ChatColor.YELLOW + "/achievement §o- Shows the achievement-menu.");

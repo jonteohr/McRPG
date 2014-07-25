@@ -1,7 +1,10 @@
 package me.condolent;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,10 +25,15 @@ public class SimpleCommands implements CommandExecutor {
 	public FileConfiguration getConfig() {
 		return plugin.getConfig();
 	}
+	
+	public FileConfiguration getFactions() {
+		return plugin.getPlayerFactions();
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
+		String UUID = p.getUniqueId().toString();
 		
 		if(cmd.getName().equalsIgnoreCase("heal")) {
 			if(p.hasPermission("mcrpg.admin")) {
@@ -80,8 +88,29 @@ public class SimpleCommands implements CommandExecutor {
 		
 		if(cmd.getName().equalsIgnoreCase("setspawn")) {
 			if(p.hasPermission("mcrpg.admin")) {
-				p.getWorld().setSpawnLocation(p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
-				p.sendMessage(ChatColor.YELLOW + "Spawn set.");
+				
+				if(args.length < 1) {
+					p.getWorld().setSpawnLocation(p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
+					p.sendMessage(ChatColor.YELLOW + "Spawn set.");
+				} else if(args.length == 1) {
+					
+					if(args[0].equalsIgnoreCase("horde")) {
+						p.sendMessage(ChatColor.YELLOW + "Spawn for the " + ChatColor.RED + "§lHorde " + ChatColor.YELLOW + "has been set!");
+						getFactions().set("xh", p.getLocation().getBlockX());
+						getFactions().set("yh", p.getLocation().getBlockY());
+						getFactions().set("zh", p.getLocation().getBlockZ());
+						plugin.savePlayerFactions();
+					}
+					
+					if(args[0].equalsIgnoreCase("alliance")) {
+						p.sendMessage(ChatColor.YELLOW + "Spawn for the " + ChatColor.AQUA + "§lAlliance " + ChatColor.YELLOW + "has been set!");
+						getFactions().set("xa", p.getLocation().getBlockX());
+						getFactions().set("ya", p.getLocation().getBlockY());
+						getFactions().set("za", p.getLocation().getBlockZ());
+						plugin.savePlayerFactions();
+					}
+				}
+				
 			} else {
 				p.sendMessage(ChatColor.RED + "§lYou do not have access to that command.");
 			}
@@ -89,9 +118,35 @@ public class SimpleCommands implements CommandExecutor {
 		}
 		
 		if(cmd.getName().equalsIgnoreCase("spawn")) {
-			p.sendMessage(ChatColor.YELLOW + "Teleporting to spawn..");
-			p.teleport(p.getWorld().getSpawnLocation());
-			p.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 1);
+			List<String> horde = getFactions().getStringList("Horde");
+			List<String> alliance = getFactions().getStringList("Alliance");
+			
+			int xh = getFactions().getInt("xh");
+			int yh = getFactions().getInt("yh");
+			int zh = getFactions().getInt("zh");
+			
+			int xa = getFactions().getInt("xa");
+			int ya = getFactions().getInt("ya");
+			int za = getFactions().getInt("za");
+			
+			
+			Location horde_spawn = new Location(p.getWorld(), xh, yh, zh);
+			Location alliance_spawn = new Location(p.getWorld(), xa, ya, za);
+			
+			
+			if(!getFactions().getStringList("Registered_Players").contains(UUID)) {
+				p.sendMessage(ChatColor.YELLOW + "Teleporting to spawn..");
+				p.teleport(p.getWorld().getSpawnLocation());
+				p.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 1);
+			} else if(getFactions().getStringList("Registered_Players").contains(UUID)) {
+				if(horde.contains(UUID)) {
+					p.teleport(horde_spawn);
+				}
+				if(alliance.contains(UUID)) {
+					p.teleport(alliance_spawn);
+					p.setPlayerListName("hello");
+				}
+			}
 			
 			return true;
 		}

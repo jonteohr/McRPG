@@ -40,9 +40,9 @@ public class Events implements Listener {
 		
 		e.setJoinMessage(ChatColor.YELLOW + p.getName() + " joined the game");
 		
-		if(getConfig().getString("welcome_msg", "enable").equalsIgnoreCase("enable")) {
+		if(getConfig().getBoolean("welcome_msg")) {
 			p.sendMessage(getConfig().getString("MOTD").replaceAll("&", "§").replaceAll("%player%", p.getName()));
-		} else if(getConfig().getString("welcome_msg", "disable").equalsIgnoreCase("disable")) {
+		} else if(!getConfig().getBoolean("welcome_msg")) {
 			
 		}
 		if(!getPlayerCurrency().contains(p.getUniqueId().toString())) {

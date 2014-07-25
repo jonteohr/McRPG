@@ -31,13 +31,13 @@ public class Yell implements CommandExecutor {
 			}
 			String message = s.toString();
 			
-			if(getConfig().getString("admin_yell", "disable").equalsIgnoreCase("disable")) {
+			if(!getConfig().getBoolean("admin_yell")) {
 				if(args.length < 1) {
 					p.sendMessage(ChatColor.YELLOW + "Usage: /y <message>");
 				} else {
 					Bukkit.broadcastMessage(ChatColor.RED + p.getName() + " yells: " + message);
 				}
-			} else if(getConfig().getString("admin_yell", "enable").equalsIgnoreCase("enable")) {
+			} else if(getConfig().getBoolean("admin_yell")) {
 				if(p.hasPermission("mcrpg.admin")) {
 					if(args.length < 1) {
 						p.sendMessage(ChatColor.RED + "Usage: /y <message>");

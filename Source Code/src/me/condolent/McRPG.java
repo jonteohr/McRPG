@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import net.gravitydevelopment.updater.Updater;
 import net.gravitydevelopment.updater.Updater.UpdateResult;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,6 +26,10 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 
 public class McRPG extends JavaPlugin implements Listener {
 	
@@ -40,12 +45,42 @@ public class McRPG extends JavaPlugin implements Listener {
 	
 	PluginDescriptionFile pdf = getDescription();
 	
+	private Scoreboard board;
+	private Objective o;
+	private Score onlineTitle;
+	private Score players;
+	private Score space;
+	private Score space2;
+	private Score space3;
+	private Score space4;
+	private Score FirstTitle;
+	private Score FirstText;
+	private Score SecondTitle;
+	private Score SecondText;
+	
+	@SuppressWarnings("deprecation")
 	public void onEnable() {
 		getLogger().info("McRPG successfully enabled! :)");
 		this.getServer().getPluginManager().registerEvents(new Events(this), this);
 		this.getServer().getPluginManager().registerEvents(new Achievement(this), this);
 		this.getServer().getPluginManager().registerEvents(this, this);
 		this.getServer().getPluginManager().registerEvents(new Chat(this), this);
+		
+		board = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+		
+		o = board.registerNewObjective("steps", "dummy");
+		o.setDisplayName(ChatColor.AQUA  + "       §lStats      ");
+		o.setDisplaySlot(DisplaySlot.SIDEBAR);
+		
+		onlineTitle = o.getScore(Bukkit.getServer().getOfflinePlayer(ChatColor.GREEN + "§lOnline:"));
+		space = o.getScore(Bukkit.getServer().getOfflinePlayer(""));
+		space2 = o.getScore(Bukkit.getServer().getOfflinePlayer(" "));
+		space3 = o.getScore(Bukkit.getServer().getOfflinePlayer("  "));
+		space4 = o.getScore(Bukkit.getServer().getOfflinePlayer("   "));
+		FirstTitle = o.getScore(Bukkit.getServer().getOfflinePlayer("" + getConfig().getString("first_title").replaceAll("&", "§")));
+		FirstText = o.getScore(Bukkit.getServer().getOfflinePlayer("" + getConfig().getString("first_text").replaceAll("&", "§")));
+		SecondTitle = o.getScore(Bukkit.getServer().getOfflinePlayer("" + getConfig().getString("second_title").replaceAll("&", "§")));
+		SecondText = o.getScore(Bukkit.getServer().getOfflinePlayer("" + getConfig().getString("second_text").replaceAll("&", "§")));
 		
 		
 		
@@ -66,6 +101,8 @@ public class McRPG extends JavaPlugin implements Listener {
 		getCommand("achievement").setExecutor(new Achievement(this));
 		plugin = this;
 		
+		getConfig().addDefault("stat_monitor", true);
+		
 		getConfig().options().copyDefaults();
 		saveDefaultConfig();
 		saveDefaultPlayerLogging();
@@ -76,7 +113,11 @@ public class McRPG extends JavaPlugin implements Listener {
 		if(getConfig().getString("auto_update", "notify").equalsIgnoreCase("notify")) {
 			Updater updater = new Updater(this, 75582, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);
 			if(updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
-				getLogger().info("A new version is available! " + updater.getLatestName());
+				getLogger().info("********* McRPG Auto-Updater *********");
+				getLogger().info("*      A new version of McRPG is     *");
+				getLogger().info("*       available for download!      *");
+				getLogger().info("*             " + updater.getLatestName() + "             *");
+				getLogger().info("**************************************");
 			}
 		} else if(getConfig().getString("auto_update", "auto").equalsIgnoreCase("auto")) {
 			@SuppressWarnings("unused")
@@ -203,6 +244,7 @@ public class McRPG extends JavaPlugin implements Listener {
 		saveDefaultPlayerAchievements();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
@@ -219,9 +261,27 @@ public class McRPG extends JavaPlugin implements Listener {
 				
 			}
 		}
+		
+		if(getConfig().getBoolean("stat_monitor")) {
+			players = o.getScore(Bukkit.getServer().getOfflinePlayer("" + Bukkit.getServer().getOnlinePlayers().length));
+			
+			p.setScoreboard(board);
+			
+			space2.setScore(10);
+			onlineTitle.setScore(9);
+			players.setScore(8);
+			space.setScore(7);
+			FirstTitle.setScore(6);
+			FirstText.setScore(5);
+			space3.setScore(4);
+			SecondTitle.setScore(3);
+			SecondText.setScore(2);
+			space4.setScore(1);
+			
+		} else if(!getConfig().getBoolean("stat_monitor")) {
+
+		}
 	}
-	
-	
 	
 	
 	// 	PlayerClasses.YML

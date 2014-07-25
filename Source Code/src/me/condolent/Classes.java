@@ -35,37 +35,42 @@ public class Classes implements CommandExecutor {
 		/* ITEMS */
 		
 		ItemStack warriorweapon = new ItemStack(Material.STONE_SWORD, 1);
+		warriorweapon.setDurability((short) 64);
 		ItemMeta mwarriorweapon = warriorweapon.getItemMeta();
 		mwarriorweapon.setDisplayName(ChatColor.GRAY + "Homemade Sword");
 		mwarriorweapon.setLore(Arrays.asList("Made of the stone outside your house"));
 		warriorweapon.setItemMeta(mwarriorweapon);
 		
 		ItemStack warriorchest = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+		warriorchest.setDurability((short) 25);
 		ItemMeta mwarriorchest = warriorchest.getItemMeta();
 		mwarriorchest.setDisplayName(ChatColor.GRAY + "Thin jacket");
 		warriorchest.setItemMeta(mwarriorchest);
 		
 		ItemStack mageweapon = new ItemStack(Material.WOOD_HOE, 1);
+		mageweapon.setDurability((short) 45);
 		ItemMeta mmageweapon = mageweapon.getItemMeta();
 		mmageweapon.setDisplayName(ChatColor.GRAY + "Old Staff");
 		mmageweapon.setLore(Arrays.asList("You get a splinter just by", "touching it..."));
 		mageweapon.setItemMeta(mmageweapon);
 		
 		ItemStack magehat = new ItemStack(Material.LEATHER_HELMET, 1);
+		magehat.setDurability((short) 35);
 		ItemMeta mmagehat = magehat.getItemMeta();
 		mmagehat.setDisplayName(ChatColor.GRAY + "Wizard's Hat");
 		magehat.setItemMeta(mmagehat);
 		
 		ItemStack paladinweapon = new ItemStack(Material.STONE_AXE, 1);
+		paladinweapon.setDurability((short) 27);
 		ItemMeta mpaladinweapon = paladinweapon.getItemMeta();
 		mpaladinweapon.setDisplayName(ChatColor.GRAY + "Stone Hammer");
 		mpaladinweapon.setLore(Arrays.asList("Homemade"));
 		paladinweapon.setItemMeta(mpaladinweapon);
 		
 		ItemStack paladinlegs = new ItemStack(Material.IRON_LEGGINGS, 1);
+		paladinlegs.setDurability((short) 64);
 		ItemMeta mpaladinlegs = paladinlegs.getItemMeta();
 		mpaladinlegs.setDisplayName(ChatColor.GRAY + "Father's Old Legguards");
-		paladinlegs.setDurability((short) 4);
 		paladinlegs.setItemMeta(mpaladinlegs);
 		
 		

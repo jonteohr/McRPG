@@ -9,14 +9,29 @@
 # disable = Will not do anything.
 auto_update: notify
 
+# STAT-MONITOR
+# Here you can configure 2 rows of text on the scoreboard.
+# You can leave it by default or just change it to whatever you want!
+# Max text-length is 16 characters.
+# Use '&' and a color code to change the color.
+first_title: '&6&lServer:'
+first_text: 'ServerName'
+second_title: '&d&lWebsite:'
+second_text: 'bit.ly1gR7UqV'
+
 # Send the player a welcome-message when joining?
 # If enable it will send the player a message
-welcome_msg: enable
+welcome_msg: true
 
 # If welcome_msg is 'enable', then what should the message be?
 # %player% is playername.
 # To use colors, type & and then the COLOR CODE. Find all at: http://minecraft.gamepedia.com/Formatting_codes#Color_codes
 MOTD: '&6&oDarion whispers: Welcome to the server, %player%.'
+
+# Enable stat-monitor?
+# true = yes
+# false = no
+stat_monitor: true
 
 
 ##################################
@@ -25,10 +40,10 @@ MOTD: '&6&oDarion whispers: Welcome to the server, %player%.'
 
 # This is for enabling or disabling the colors in chat, for instance if someone types &2Hello it will show the message in green.
 # Disabling this will NOT disable the colors for other messages, such as MOTD or other plugin messages. Only player-sent messages.
-chat_colors: enable
+chat_colors: true
 
 # Make the /y <message> command only availible to players with admin permission? (mcrpg.admin)
-admin_yell: disable
+admin_yell: false
 
 # This will set how the chat is displayed. You can set where the username is supposed to be and in what color anything should be in.
 # Below are some variables that might help you formatting the chat.

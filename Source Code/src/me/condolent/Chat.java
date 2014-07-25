@@ -36,11 +36,11 @@ public class Chat implements Listener {
 		Player p = e.getPlayer();
 		
 		
-		if(getConfig().getString("chat_colors", "enable").equalsIgnoreCase("enable")) {
+		if(getConfig().getBoolean("chat_colors")) {
 			String message = e.getMessage().replaceAll("&", "§");
 			e.setMessage(message);
 		}
-		if(getConfig().getString("chat_colors", "disable").equalsIgnoreCase("disable")) {
+		if(!getConfig().getBoolean("chat_colors")) {
 
 		}
 		
