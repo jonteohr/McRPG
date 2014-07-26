@@ -199,7 +199,6 @@ This is the best way to update, follow these steps to update the plugin:
 _A: Well since the plugin is still in development, we add a bunch of new things to the config-file almost after every update. The config file doesn't automatically update when the plugin does, therefor these steps are required to maintain the plugin in full capabilitiy_
 
 # To-do
-* Different spawn for each classes
 * Powers for classes (Perhaps)
 
 # Links
