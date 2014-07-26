@@ -31,6 +31,8 @@ with inspiration from World of Warcraft.
 * **Private whispers** - You can send player private whispers, only visible to the sender and receiver.
 * **Classes** - With different classes, you can choose what your character will become and what powers you will possess
 * **Factions** - With 2 different factions to choose, you can either become one of the fierce bad guys, or the team playing good guys!
+* **Gold** - Add a currency to your server, used to buy items and sell items to your dearest players!
+* **Achievements** - Earn custom achievements provided by McRPG, with them you earn gold and items.
 
 _More features will be added as we implement them into the plugin_
 
