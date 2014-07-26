@@ -146,7 +146,8 @@ Registered_Players: []
 ### Permissions
 | Node  | Gives |
 | ------------- | ------------- |
-| mcrpg.admin  | Access to admin-related commands  |
+| mcrpg.admin | Access to admin-related commands  |
+| mcrpg.moderator | Access to moderator-related commands|
 
 ### Auto-Updating
 Auto updating is when the plugin is automatically dowmloading a new update if there is one on BukkitDev. This is disabled by default, but can easily be changed in the config-file.   
