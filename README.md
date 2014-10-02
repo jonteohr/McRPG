@@ -1,6 +1,8 @@
 McRPG
 =====
 
+**This plugin will not be updated until the whole legal investigation of Bukkit is fully complete.**
+
 ![](http://dev.bukkit.org/media/images/74/432/logo_beta.png)
 
 # Table of Contents:
