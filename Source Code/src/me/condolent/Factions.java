@@ -59,7 +59,7 @@ public class Factions implements CommandExecutor {
 				if(!getFactionsLog().getStringList("Registered_Players").contains(p.getUniqueId().toString())) {
 					if(args[0].equalsIgnoreCase("alliance")) {
 						p.sendMessage(ChatColor.YELLOW + "You've chosen to join the " + ChatColor.AQUA + "§lAlliance" + ChatColor.YELLOW + ".");
-						p.playSound(p.getLocation(), Sound.HORSE_IDLE, 1, 1);
+						p.playSound(p.getLocation(), Sound.ENTITY_HORSE_BREATHE, 1, 1);
 						alliance.add(p.getUniqueId().toString());
 						registered_players.add(p.getUniqueId().toString());
 						plugin.savePlayerFactions();
@@ -68,7 +68,7 @@ public class Factions implements CommandExecutor {
 					if(args[0].equalsIgnoreCase("horde")) {
 					
 						p.sendMessage(ChatColor.YELLOW + "You've chosen to join the " + ChatColor.RED + "§lHorde" + ChatColor.YELLOW + ".");
-						p.playSound(p.getLocation(), Sound.ZOMBIE_INFECT, 1, 1);
+						p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_INFECT, 1, 1);
 						horde.add(p.getUniqueId().toString());
 						registered_players.add(p.getUniqueId().toString());
 						plugin.savePlayerFactions();

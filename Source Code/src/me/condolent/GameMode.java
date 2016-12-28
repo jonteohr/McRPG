@@ -31,25 +31,25 @@ public class GameMode implements CommandExecutor {
 				if(args[0].equalsIgnoreCase("1")) {
 					p.sendMessage(ChatColor.YELLOW + "Gamemode set to creative-mode");
 					p.setGameMode(org.bukkit.GameMode.CREATIVE);
-					p.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					p.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				
 				if(args[0].equalsIgnoreCase("0")) {
 					p.sendMessage(ChatColor.YELLOW + "Gamemode set to survival-mode");
 					p.setGameMode(org.bukkit.GameMode.SURVIVAL);
-					p.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					p.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				
 				if(args[0].equalsIgnoreCase("creative")) {
 					p.sendMessage(ChatColor.YELLOW + "Gamemode set to creative-mode");
 					p.setGameMode(org.bukkit.GameMode.CREATIVE);
-					p.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					p.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				
 				if(args[0].equalsIgnoreCase("survival")) {
 					p.sendMessage(ChatColor.YELLOW + "Gamemode set to survival-mode");
 					p.setGameMode(org.bukkit.GameMode.SURVIVAL);
-					p.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					p.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				
 			}
@@ -66,32 +66,32 @@ public class GameMode implements CommandExecutor {
 					target.setGameMode(org.bukkit.GameMode.CREATIVE);
 					p.sendMessage(ChatColor.YELLOW + "Changed " + target.getName() + "'s gamemode to Creative");
 					target.sendMessage(ChatColor.YELLOW + "Your gamemode was changed to Creative by " + ChatColor.DARK_AQUA + "[GM] " + ChatColor.YELLOW + p.getName());
-					target.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					target.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				if(args[0].equalsIgnoreCase("0")) {
 					target.setGameMode(org.bukkit.GameMode.SURVIVAL);
 					p.sendMessage(ChatColor.YELLOW + "Changed " + target.getName() + "'s gamemode to Survival");
 					target.sendMessage(ChatColor.YELLOW + "Your gamemode was changed to Survival by " + ChatColor.DARK_AQUA + "[GM] " + ChatColor.YELLOW + p.getName());
-					target.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					target.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				if(args[0].equalsIgnoreCase("creative")) {
 					target.setGameMode(org.bukkit.GameMode.CREATIVE);
 					p.sendMessage(ChatColor.YELLOW + "Changed " + target.getName() + "'s gamemode to Creative");
 					target.sendMessage(ChatColor.YELLOW + "Your gamemode was changed to Creative by " + ChatColor.DARK_AQUA + "[GM] " + ChatColor.YELLOW + p.getName());
-					target.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					target.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 				if(args[0].equalsIgnoreCase("survival")) {
 					target.setGameMode(org.bukkit.GameMode.SURVIVAL);
 					p.sendMessage(ChatColor.YELLOW + "Changed " + target.getName() + "'s gamemode to Survival");
 					target.sendMessage(ChatColor.YELLOW + "Your gamemode was changed to Survival by " + ChatColor.DARK_AQUA + "[GM] " + ChatColor.YELLOW + p.getName());
-					target.playSound(p.getLocation(), Sound.PORTAL_TRAVEL, 1, 1);
+					target.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
 				}
 			}
 			
 			return true;
 			} else {
 				p.sendMessage(ChatColor.RED + "§lYou do not have access to this command!");
-				p.playSound(p.getLocation(), Sound.GHAST_SCREAM, 1, 1);
+				p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, 1, 1);
 			}
 		}
 		

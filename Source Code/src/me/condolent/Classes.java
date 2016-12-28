@@ -104,7 +104,7 @@ public class Classes implements CommandExecutor {
 							p.sendMessage(ChatColor.YELLOW + "You chose Warrior as your class and were given starter-gear for Warriors.");
 							p.getInventory().addItem(new ItemStack(warriorweapon));
 							p.getInventory().setChestplate(warriorchest);
-							p.playSound(p.getLocation(), Sound.ANVIL_USE, 1, 1);
+							p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
 							classed_players.add(p.getUniqueId().toString());
 							warriors.add(p.getUniqueId().toString());
 							plugin.savePlayerLogging();
@@ -114,7 +114,7 @@ public class Classes implements CommandExecutor {
 						p.sendMessage(ChatColor.YELLOW + "You chose Mage as your class and were given starter-gear for Mages.");
 						p.getInventory().addItem(new ItemStack(mageweapon));
 						p.getInventory().setHelmet(new ItemStack(magehat));
-						p.playSound(p.getLocation(), Sound.FIRE, 1, 1);
+						p.playSound(p.getLocation(), Sound.ITEM_FIRECHARGE_USE, 1, 1);
 						classed_players.add(p.getUniqueId().toString());
 						mages.add(p.getUniqueId().toString());
 						plugin.savePlayerLogging();
@@ -124,7 +124,7 @@ public class Classes implements CommandExecutor {
 						p.sendMessage(ChatColor.YELLOW + "You chose Paladin as your class and were given starter-gear for Paladins.");
 						p.getInventory().addItem(new ItemStack(paladinweapon));
 						p.getInventory().setLeggings(new ItemStack(paladinlegs));
-						p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 1);
+						p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
 						classed_players.add(p.getUniqueId().toString());
 						paladins.add(p.getUniqueId().toString());
 						plugin.savePlayerLogging();

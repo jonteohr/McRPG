@@ -67,7 +67,7 @@ public class SimpleCommands implements CommandExecutor {
 				if(args.length < 1) {
 						p.getInventory().clear();
 						p.sendMessage(ChatColor.YELLOW + "Inventory cleared!");
-						p.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 2);
+						p.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRIGGER, 1, 2);
 				} else if(args.length == 1) {
 					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getServer().getPlayerExact(args[0]);
@@ -78,7 +78,7 @@ public class SimpleCommands implements CommandExecutor {
 					target.getInventory().clear();
 					p.sendMessage(ChatColor.YELLOW + "You cleared " + target.getName() + "'s inventory.");
 					target.sendMessage(ChatColor.DARK_AQUA + "[GM] " + ChatColor.YELLOW + p.getName() + " cleared your inventory");
-					target.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 2);
+					target.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRIGGER, 1, 2);
 				}
 			} else {
 				p.sendMessage(ChatColor.RED + "§lYou do not have permission to this command.");
@@ -137,7 +137,7 @@ public class SimpleCommands implements CommandExecutor {
 			if(!getFactions().getStringList("Registered_Players").contains(UUID)) {
 				p.sendMessage(ChatColor.YELLOW + "Teleporting to spawn..");
 				p.teleport(p.getWorld().getSpawnLocation());
-				p.playSound(p.getLocation(), Sound.PORTAL_TRIGGER, 1, 1);
+				p.playSound(p.getLocation(), Sound.BLOCK_PORTAL_TRIGGER, 1, 1);
 			} else if(getFactions().getStringList("Registered_Players").contains(UUID)) {
 				if(horde.contains(UUID)) {
 					p.teleport(horde_spawn);

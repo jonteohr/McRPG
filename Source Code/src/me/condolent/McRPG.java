@@ -263,7 +263,7 @@ public class McRPG extends JavaPlugin implements Listener {
 		}
 		
 		if(getConfig().getBoolean("stat_monitor")) {
-			players = o.getScore(Bukkit.getServer().getOfflinePlayer("" + Bukkit.getServer().getOnlinePlayers().length));
+			players = o.getScore(Bukkit.getServer().getOfflinePlayer("" + Bukkit.getServer().getOnlinePlayers().size()));
 			
 			p.setScoreboard(board);
 			
